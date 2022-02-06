@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Add items to the list</p>
+<input id="new-item"> </input>
+
+<button id="add-item">Add</button>
+
+<!--EmptyItemList-->
+
+<ul id="list-of-items"></ul>
+<button id="clear-button">Clear list</button>
+
+<script>
+    let elementsInList = 0
+    let maxElements = 10
+
+
+    let textInput = document.querySelector('#new-item')
+    let addButton = document.querySelector('#add-item')
+    let textList = document.querySelector('#list-of-items')
+    let clearButton = document.querySelector('#clear-button')
+
+    document.addEventListener('keyup', function () {
+        if (Event.code === 13){
+            addButton.click()
+
+        }
+    })
+
+    addButton.addEventListener('click',function(){
+        //read text input
+        let newText = textInput.value
+
+        if (textInput.length === 0){
+            alert('No text entered')
+            return;
+        }
+
+        if(elementsInList >= maxElements){
+            alert('Max items reached')
+            return
+
+        }
+
+
+        //create a new li element
+        let newListItem = document.createElement('li')
+        //the li element text should be the text from the input
+        newListItem.innerHTML = newText
+        //new li item is child of the ul element
+        textList.appendChild(newListItem)
+        //clear text in the input
+        textInput.value = ''
+
+        elementsInList++
+})
+    clearButton.addEventListener('click', function () {
+        textList.innerHTML = ''
+    })
+
+</script>
+
+</body>
+</html>
